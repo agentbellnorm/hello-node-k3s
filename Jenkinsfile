@@ -2,35 +2,19 @@ pipeline {
     agent {
         kubernetes {
             defaultContainer 'jnlp'
-            yaml """
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-    - name: node
-      image: arm64v8/node:17-bullseye-slim
-      command: ["echo", "-n", "hello from bullseye slim"]
-      imagePullPolicy: IfNotPresent
-      resources:
-        requests:
-          memory: "1Gi"
-          cpu: "500m"
-        limits:
-          memory: "1Gi"
-"""
         }
     }
     stages {
         stage('Install') {
             steps {
-                container('node') {
+                container('arm64v8/node:17-bullseye-slim') {
                     sh 'npm install'
                 }
             }
         }
         stage('Build Image') {
             steps {
-                container('node') {
+                container('arm64v8/node:17-bullseye-slim') {
                     sh 'node buildContainer.js'
                 }
             }
