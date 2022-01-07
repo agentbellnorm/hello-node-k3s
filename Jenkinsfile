@@ -9,7 +9,7 @@ spec:
   containers:
     - name: node
       image: arm64v8/node:17-bullseye-slim
-      command: ["tail", "-f", "/dev/null"]
+      command: ["echo", "-n", "hello from bullseye slim"]
       imagePullPolicy: IfNotPresent
       resources:
         requests:
