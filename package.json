@@ -5,9 +5,11 @@
   "main": "index.js",
   "author": "Morgan Bentell <morgan.bentell@gmail.com>",
   "license": "MIT",
-  "private": null,
+  "private": true,
   "dependencies": {
     "body-parser": "^1.19.1",
+    "container-image-builder": "agentbellnorm/nodejs-container-image-builder#0f1a317",
+    "cross-spawn": "^7.0.3",
     "express": "^4.17.2"
   }
 }
