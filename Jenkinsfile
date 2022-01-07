@@ -1,10 +1,4 @@
 pipeline {
-    environment {
-        GIT_REPO_URL = 'https://github.com/bbende/cloud-native-examples.git'
-        GIT_REPO_BRANCH = 'main'
-        REGISTRY_URL = 'docker-registry-service.docker-registry.svc.cluster.local:5000'
-        REGISTRY_CREDENTIAL = credentials('docker-registry-private')
-    }
     agent {
         kubernetes {
             defaultContainer 'jnlp'
