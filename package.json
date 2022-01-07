@@ -1,0 +1,13 @@
+{
+  "name": "hello",
+  "version": "1.0.0",
+  "description": "\"is it me you're looking for?\"",
+  "main": "index.js",
+  "author": "Morgan Bentell <morgan.bentell@gmail.com>",
+  "license": "MIT",
+  "private": null,
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2"
+  }
+}
