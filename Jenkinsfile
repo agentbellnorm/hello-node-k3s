@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                sh 'buildah bud -t --isolation chroot test/hello-node-k3s .'
+                sh 'podman build --tag test/hello-node-k3s -f ./Dockerfil'
             }
         }
     }
