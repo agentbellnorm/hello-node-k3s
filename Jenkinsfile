@@ -6,6 +6,8 @@ podTemplate(yaml: '''
               apiVersion: v1
               kind: Pod
               spec:
+                securityContext:
+                  runAsUser: 1000 # default UID of jenkins user in agent image
                 containers:
                 - name: node
                   image: arm64v8/node:17-bullseye
