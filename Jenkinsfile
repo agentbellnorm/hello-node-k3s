@@ -8,7 +8,7 @@ kind: Pod
 spec:
   containers:
     - name: node
-      image: arm64v8/node:17-bullseye-slim
+      image: arm64v8/node:17-bullseye
       command:
       - sleep
       args:
@@ -24,7 +24,7 @@ spec:
         }
     }
     stages {
-        stage('Install') {
+        stage('check version') {
             steps {
                 sh 'node -v'
             }
