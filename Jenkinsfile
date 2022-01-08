@@ -11,14 +11,14 @@ pipeline {
         node(POD_LABEL) {
             stage('Install') {
                 steps {
-                    container('node-container') {
+                    container('node') {
                         sh 'npm install'
                     }
                 }
             }
             stage('Build Image') {
                 steps {
-                    container('node-container') {
+                    container('node') {
                         sh 'node buildContainer.js'
                     }
                 }
