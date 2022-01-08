@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                sh 'node buildContainer.js'
+                sh 'buildah bud -t test/hello-node-k3s .'
             }
         }
     }

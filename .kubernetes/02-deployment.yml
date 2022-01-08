@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: hello-node-on-k3s
+  namespace: hello-node-on-k3s
+  labels:
+    app: hello-node
+    name: hello-node-on-k3s
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-node
+      task: hello-node-on-k3s
+  template:
+    metadata:
+      labels:
+        app: hello-node
+        task: hello-node-on-k3s
+    spec:
+      containers:
+        - name: hello-node-on-k3s
+          image: docker.registry.private/test/hello-node-k3s
+          ports:
+            - containerPort: 80
