@@ -4,19 +4,19 @@ metadata:
   name: hello-node-on-k3s
   namespace: hello-node-on-k3s
   labels:
-    app: hello-node
+    app: hello-node-on-k3s
     name: hello-node-on-k3s
 
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: hello-node
+      app: hello-node-on-k3s
       task: hello-node-on-k3s
   template:
     metadata:
       labels:
-        app: hello-node
+        app: hello-node-on-k3s
         task: hello-node-on-k3s
     spec:
       containers:
