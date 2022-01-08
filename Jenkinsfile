@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                sh 'podman build --tag test/hello-node-k3s -f ./Dockerfil'
+                sh 'podman build --tag test/hello-node-k3s -f ./Dockerfile'
             }
         }
     }
