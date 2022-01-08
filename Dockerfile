@@ -1,4 +1,4 @@
-FROM node:16
+FROM docker.io/arm64v8/node:16-bullseye-slim
 
 WORKDIR /usr/src/app
 COPY package*.json ./
