@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                sh 'buildah bud -t test/hello-node-k3s .'
+                sh 'buildah bud -t --isolation chroot test/hello-node-k3s .'
             }
         }
     }
