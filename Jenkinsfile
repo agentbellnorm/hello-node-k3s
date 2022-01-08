@@ -7,9 +7,9 @@ apiVersion: v1
 kind: Pod
 spec:
   containers:
-    - name: node
+    - name: node-container
       image: arm64v8/node:17-bullseye-slim
-      command: ["tail", "-f", "/dev/null"]
+      command: ["sleep", "infinity"]
       imagePullPolicy: IfNotPresent
       resources:
         requests:
@@ -23,14 +23,14 @@ spec:
     stages {
         stage('Install') {
             steps {
-                container('node') {
+                container('node-container') {
                     sh 'npm install'
                 }
             }
         }
         stage('Build Image') {
             steps {
-                container('node') {
+                container('node-container') {
                     sh 'node buildContainer.js'
                 }
             }
