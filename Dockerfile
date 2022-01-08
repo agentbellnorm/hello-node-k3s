@@ -1,11 +1,8 @@
 FROM docker.io/arm64v8/node:16-bullseye-slim
 
 WORKDIR /usr/src/app
-COPY package*.json ./
 
-RUN npm ci --only=production
-
-COPY index.js ./
+COPY * ./
 
 EXPOSE 3000
 
