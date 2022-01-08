@@ -9,7 +9,10 @@ spec:
   containers:
     - name: node
       image: arm64v8/node:17-bullseye-slim
-      command: ["sleep", "infinity"]
+      command:
+      - sleep
+      args:
+      - 99d
       imagePullPolicy: IfNotPresent
       resources:
         requests:
