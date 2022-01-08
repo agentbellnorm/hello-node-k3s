@@ -17,9 +17,9 @@ podTemplate(yaml: '''
                   - sleep
                   args:
                   - 99d
-                  volumeMounts:
-                    - mountPath: /home/jenkins/agent
-                    name: workspace-volume
+                volumeMounts:
+                - mountPath: /home/jenkins/agent
+                  name: workspace-volume
 '''
   ) {
 
