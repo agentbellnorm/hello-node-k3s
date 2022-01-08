@@ -13,6 +13,9 @@ spec:
       - sleep
       args:
       - 99d
+      securityContext:
+      runAsUser: 0
+      tty: true
       imagePullPolicy: IfNotPresent
       resources:
         requests:
