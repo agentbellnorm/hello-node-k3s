@@ -22,7 +22,7 @@ let main = async () => {
   const registryUser = process.env.REGISTRY_CREDS_USR;
   const registryPw = process.env.REGISTRY_CREDS_PSW */
 
-  const registryUrl = "docker.registry.private";
+  const registryUrl = "docker-registry-service.docker-registry.svc.cluster.local";
   const registryUser = "registry";
   const registryPw = "flowers";
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
