@@ -19,7 +19,10 @@ podTemplate(yaml: '''
   node(POD_LABEL) {
     stage('Build a Maven project') {
       container('node') {
-        sh 'node -v'
+        sh '''
+        echo -n hej!
+        node -v
+        '''
       }
     }
   }
