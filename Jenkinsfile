@@ -1,7 +1,7 @@
 pipeline {
     environment {
         REGISTRY_URL = 'docker-registry-service.docker-registry.svc.cluster.local:5000'
-        REGISTRY_CREDENTIAL = credentials('docker-registry-private')
+        REGISTRY_CREDS = credentials('docker-registry-private')
         IMAGE_NAME='test/hello-node-k3s'
     }
     agent {
@@ -18,7 +18,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 sh 'podman build --tag $IMAGE_NAME -f ./Dockerfile'
-                sh 'podman push $IMAGE_NAME $REGISTRY_URL/$IMAGE_NAME:latest --creds=REGISTRY_CREDENTIAL_USR:REGISTRY_CREDENTIAL_PSW --tls-verify=false'
+                sh 'podman push $IMAGE_NAME $REGISTRY_URL/$IMAGE_NAME:latest --creds=$REGISTRY_CREDS --tls-verify=false'
             }
         }
     }
