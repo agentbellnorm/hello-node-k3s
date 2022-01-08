@@ -23,12 +23,7 @@ spec:
     stages {
         stage('Install') {
             steps {
-                sh 'npm install'
-            }
-        }
-        stage('Build Image') {
-            steps {
-                sh 'node buildContainer.js'
+                sh 'node -v'
             }
         }
     }
