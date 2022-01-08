@@ -1,34 +1,26 @@
-pipeline {
-    agent {
-        kubernetes {
-            defaultContainer 'node'
-            yaml """
-apiVersion: v1
-kind: Pod
-spec:
-  securityContext:
-    runAsUser: 1000 # default UID of jenkins user in agent image
-  containers:
-    - name: node
-      image: arm64v8/node:17-bullseye
-      command:
-      - cat
-      tty: true
-      imagePullPolicy: IfNotPresent
-      resources:
-        requests:
-          memory: "1Gi"
-          cpu: "500m"
-        limits:
-          memory: "1Gi"
-"""
-        }
+/**
+ * This pipeline describes a multi container job, running Maven and Golang builds
+ */
+
+podTemplate(yaml: '''
+              apiVersion: v1
+              kind: Pod
+              spec:
+                containers:
+                - name: node
+                  image: arm64v8/node:17-bullseye
+                  command:
+                  - sleep
+                  args:
+                  - 99d
+'''
+  ) {
+
+  node(POD_LABEL) {
+    stage('Build a Maven project') {
+      container('node') {
+        sh 'node -v'
+      }
     }
-    stages {
-        stage('check version') {
-            steps {
-                sh 'node -v'
-            }
-        }
-    }
+  }
 }
