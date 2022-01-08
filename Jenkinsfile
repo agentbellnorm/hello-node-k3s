@@ -2,39 +2,25 @@ pipeline {
     agent {
         kubernetes {
             defaultContainer 'jnlp'
-            yaml """
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-    - name: node-container
-      image: arm64v8/node:17-bullseye-slim
-      command:
-        - sleep
-        args:
-        - 99d
-      imagePullPolicy: IfNotPresent
-      resources:
-        requests:
-          memory: "1Gi"
-          cpu: "500m"
-        limits:
-          memory: "1Gi"
-"""
         }
     }
-    stages {
-        stage('Install') {
-            steps {
-                container('node-container') {
-                    sh 'npm install'
+    podTemplate(containers: [
+        containerTemplate(name: 'node', image: 'arm64v8/node:17-bullseye-slim', command: 'sleep', args: '99d'),
+        containerTemplate(name: 'jnlp', image: 'pi4k8s/inbound-agent:4.3', command: 'sleep', args: '99d')
+    ]) {
+        node(POD_LABEL) {
+            stage('Install') {
+                steps {
+                    container('node-container') {
+                        sh 'npm install'
+                    }
                 }
             }
-        }
-        stage('Build Image') {
-            steps {
-                container('node-container') {
-                    sh 'node buildContainer.js'
+            stage('Build Image') {
+                steps {
+                    container('node-container') {
+                        sh 'node buildContainer.js'
+                    }
                 }
             }
         }
