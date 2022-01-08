@@ -8,6 +8,7 @@ spec:
   ports:
     - name: http
       port: 80
+      targetport: 3000
   selector:
-    app: hello-node
+    app: traefiklabs
     task: hello-node-on-k3s

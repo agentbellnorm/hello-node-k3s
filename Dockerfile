@@ -2,7 +2,7 @@ FROM docker.io/arm64v8/node:16-bullseye-slim
 
 WORKDIR /usr/src/app
 
-COPY * ./
+COPY ./* ./
 
 EXPOSE 3000
 
