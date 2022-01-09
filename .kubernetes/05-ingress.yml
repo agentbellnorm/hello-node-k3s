@@ -1,0 +1,18 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: hello-node-on-k3s
+  namespace: hello-node-on-k3s
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /hello-node
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-node-on-k3s
+                port:
+                  number: 80
