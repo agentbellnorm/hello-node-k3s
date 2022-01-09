@@ -27,8 +27,11 @@ pipeline {
             steps{
                 withKubeConfig([credentialsId: 'rpile-kubeconfig']) {
                     //replace the image tag with the git has in the file 
-                    sh "sed -i 's/$IMAGE_NAME:latest/$IMAGE_NAME:$GIT_SHORT_HASH/' $DEPLOY_MANIFEST"
-                    sh 'cat $DEPLOY_MANIFEST'
+                    sh """#!/bin/bash
+                          cat "${DEPLOY_MANIFEST}" | grep image
+                          sed -i 's|"${IMAGE_NAME}":latest|"${IMAGE_NAME}":"${GIT_SHORT_HASH}"|' app.yml
+                          cat "${DEPLOY_MANIFEST}" | grep image
+   """
                     
                     // apply the deployment
                     sh 'kubectl apply -f $DEPLOY_MANIFEST'
