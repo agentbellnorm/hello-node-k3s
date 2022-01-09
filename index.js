@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 const port = 3000;
 
 app.get("/hello-node", (req, res) => {
-  res.send("Hello who it may concern!");
+  res.send("Hello whom it may concern!");
 });
 
 app.post("/hello-node", (req, res) => {
