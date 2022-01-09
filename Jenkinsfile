@@ -12,28 +12,28 @@ pipeline {
         }
     }
     stages {
-        // stage('Install') {
-        //     steps {
-        //         sh 'npm install'
-        //     }
-        // }
-        // stage('Build Image') {
-        //     steps {
-        //         sh 'podman build --tag $IMAGE_NAME -f ./Dockerfile'
-        //         sh 'podman push $IMAGE_NAME $REGISTRY_URL/$IMAGE_NAME:$GIT_SHORT_HASH --creds=$REGISTRY_CREDS --tls-verify=false'
-        //     }
-        // }
+        stage('Install') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Build Image') {
+            steps {
+                sh 'podman build --tag $IMAGE_NAME -f ./Dockerfile'
+                sh 'podman push $IMAGE_NAME $REGISTRY_URL/$IMAGE_NAME:$GIT_SHORT_HASH --creds=$REGISTRY_CREDS --tls-verify=false'
+            }
+        }
         stage('Deploy') {
             steps{
                 withKubeConfig([credentialsId: 'rpile-kubeconfig']) {
-                    //replace the image tag with the git has in the file 
+                    // in the deployment yaml file, replace the image tag with the current git hash
                     sh """#!/bin/bash
                           cat "${DEPLOY_MANIFEST}" | grep image
-                          sed --debug -i 's|${IMAGE_NAME}:latest|${IMAGE_NAME}:${GIT_SHORT_HASH}|' "${DEPLOY_MANIFEST}"
+                          sed -i 's|${IMAGE_NAME}:latest|${IMAGE_NAME}:${GIT_SHORT_HASH}|' "${DEPLOY_MANIFEST}"
                           cat "${DEPLOY_MANIFEST}" | grep image
    """
                     
-                    // apply the deployment
+                    // apply the new deployment
                     sh 'kubectl apply -f $DEPLOY_MANIFEST'
                 }
             }
