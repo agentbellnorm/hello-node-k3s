@@ -29,7 +29,7 @@ pipeline {
                     //replace the image tag with the git has in the file 
                     sh """#!/bin/bash
                           cat "${DEPLOY_MANIFEST}" | grep image
-                          sed -i 's|"${IMAGE_NAME}":latest|"${IMAGE_NAME}":"${GIT_SHORT_HASH}"|' app.yml
+                          sed -i 's|"${IMAGE_NAME}":latest|"${IMAGE_NAME}":"${GIT_SHORT_HASH}"|' "${DEPLOY_MANIFEST}"
                           cat "${DEPLOY_MANIFEST}" | grep image
    """
                     
