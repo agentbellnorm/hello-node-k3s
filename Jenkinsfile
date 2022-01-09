@@ -22,7 +22,9 @@ pipeline {
         //     }
         // }
         stage('Deploy') {
-            kubernetesDeploy configs: '.kubernetes/02-deployment.yml', kubeConfig: [path: ''], kubeconfigId: 'rpile-kubeconfig', secretName: 'docker-registry-htpasswd', secretNamespace: 'docker-registry', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+            steps{
+                kubernetesDeploy configs: '.kubernetes/02-deployment.yml', kubeConfig: [path: ''], kubeconfigId: 'rpile-kubeconfig', secretName: 'docker-registry-htpasswd', secretNamespace: 'docker-registry', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+            }
         }
     }
 }
