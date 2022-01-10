@@ -10,6 +10,10 @@ app.get("/hello-node", (req, res) => {
   res.send("Hello whom it may concern!");
 });
 
+app.get("/", (req, res) => {
+  res.send("Is it me you're looking for?");
+});
+
 app.post("/hello-node", (req, res) => {
   res.send(JSON.stringify(`Hello ${req.body.name}!`));
 });
