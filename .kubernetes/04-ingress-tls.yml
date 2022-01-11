@@ -5,13 +5,13 @@ metadata:
   namespace: hello-node-on-k3s
   annotations:
     kubernetes.io/ingress.class: "traefik"
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   tls:
     - hosts:
         - rpile3.bentell.se
-      secretName: hello-node-on-k3s-cert
+      secretName: hello-node-prod
   rules:
     - host: rpile3.bentell.se
       http:

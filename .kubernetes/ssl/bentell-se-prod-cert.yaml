@@ -1,14 +1,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: bentell-se-cert
+  name: hello-node-prod
   namespace: hello-node-on-k3s
 spec:
-  commonName: rpile.bentell.se
-  secretName: hello-node-on-k3s-cert
+  commonName: rpile3.bentell.se
+  secretName: hello-node-prod
   dnsNames:
-    - rpile.bentell.se
-    - rpile2.bentell.se
+    - rpile3.bentell.se
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
