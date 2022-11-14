@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - rpile3.bentell.se
+        - rpile.bentell.se
       secretName: hello-node-prod
   rules:
-    - host: rpile3.bentell.se
+    - host: rpile.bentell.se
       http:
         paths:
           - path: /hello-node

@@ -4,10 +4,10 @@ metadata:
   name: hello-node-prod
   namespace: hello-node-on-k3s
 spec:
-  commonName: rpile3.bentell.se
+  commonName: rpile.bentell.se
   secretName: hello-node-prod
   dnsNames:
-    - rpile3.bentell.se
+    - rpile.bentell.se
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
