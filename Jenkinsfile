@@ -8,33 +8,23 @@ pipeline {
     }
     agent {
         kubernetes {
-            defaultContainer 'jnlp'
+            yaml """
+            apiVersion: v1
+            kind: Pod
+            spec:
+              containers:
+              - name: nodejs
+                image: node:18-bullseye-slim    # Use the appropriate Node.js version here
+                tty: true
+            """
         }
     }
     stages {
-        stage('Install') {
+        stage('check') {
             steps {
-                sh 'npm install'
-            }
-        }
-        stage('Build Image') {
-            steps {
-                sh 'podman build --tag $IMAGE_NAME -f ./Dockerfile'
-                sh 'podman push $IMAGE_NAME $REGISTRY_URL/$IMAGE_NAME:$GIT_SHORT_HASH --creds=$REGISTRY_CREDS --tls-verify=false'
-            }
-        }
-        stage('Deploy') {
-            steps{
-                withKubeConfig([credentialsId: 'rpile-kubeconfig']) {
-                    // in the deployment yaml file, replace the image tag with the current git hash
-                    sh """#!/bin/bash
-                          cat "${DEPLOY_MANIFEST}" | grep image
-                          sed -i 's|${IMAGE_NAME}:latest|${IMAGE_NAME}:${GIT_SHORT_HASH}|' "${DEPLOY_MANIFEST}"
-                          cat "${DEPLOY_MANIFEST}" | grep image
-   """
-                    
-                    // apply the new deployment
-                    sh 'kubectl apply -f $DEPLOY_MANIFEST'
+                container('nodejs') {
+                    sh 'node -v'
+                    sh 'npm -v'
                 }
             }
         }
