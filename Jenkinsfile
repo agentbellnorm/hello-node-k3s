@@ -7,8 +7,8 @@ pipeline {
         DEPLOY_MANIFEST=".kubernetes/02-deployment.yml"
     }
     agent {
-        agentContainer 'jnlp'
         kubernetes {
+            agentContainer 'jnlp'
             yaml """
             apiVersion: v1
             kind: Pod
