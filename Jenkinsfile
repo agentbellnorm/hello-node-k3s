@@ -7,6 +7,7 @@ pipeline {
         DEPLOY_MANIFEST=".kubernetes/02-deployment.yml"
     }
     agent {
+        agentContainer 'jnlp'
         kubernetes {
             yaml """
             apiVersion: v1
