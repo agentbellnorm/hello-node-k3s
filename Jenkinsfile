@@ -35,7 +35,7 @@ pipeline {
             steps {
                 container('podman') {
                     sh 'podman -v'
-                    sh 'podman build --previleged --tag $IMAGE_NAME -f ./Dockerfile'
+                    sh 'podman build --privileged --tag $IMAGE_NAME -f ./Dockerfile'
                 }
             }
         }
