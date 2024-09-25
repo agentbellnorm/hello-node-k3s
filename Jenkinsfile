@@ -13,6 +13,8 @@ pipeline {
             apiVersion: v1
             kind: Pod
             spec:
+              securityContext:
+                runAsUser: 1000
               containers:
               - name: nodejs
                 image: node:18-bullseye-slim    # Use the appropriate Node.js version here
@@ -35,7 +37,7 @@ pipeline {
             steps {
                 container('podman') {
                     sh 'podman -v'
-                    sh 'podman build --privileged --tag $IMAGE_NAME -f ./Dockerfile'
+                    sh 'podman build --tag $IMAGE_NAME -f ./Dockerfile'
                 }
             }
         }
