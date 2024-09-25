@@ -22,6 +22,11 @@ pipeline {
               - name: podman
                 image: quay.io/containers/podman:v5.2
                 tty: true
+                securityContext:
+                  privileged: true  # Required for using the overlay driver
+                env:
+                  - name: STORAGE_DRIVER
+                    value: overlay
             """
         }
     }
