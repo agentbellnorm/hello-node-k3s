@@ -17,15 +17,24 @@ pipeline {
               - name: nodejs
                 image: node:18-bullseye-slim    # Use the appropriate Node.js version here
                 tty: true
+              - name: podman
+                image: mgoltzsche/podman:minimal
+                tty: true
             """
         }
     }
     stages {
-        stage('check') {
+        stage('install') {
             steps {
                 container('nodejs') {
-                    sh 'node -v'
-                    sh 'npm -v'
+                    sh 'npm ci'
+                }
+            }
+        }
+        stage('build image') {
+            steps {
+                container('podman') {
+                    sh 'podman build --tag $IMAGE_NAME -f ./Dockerfile'
                 }
             }
         }
