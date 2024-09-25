@@ -20,7 +20,7 @@ pipeline {
                 image: node:18-bullseye-slim    # Use the appropriate Node.js version here
                 tty: true
               - name: podman
-                image: mgoltzsche/podman:minimal
+                image: quay.io/containers/podman:v5.2
                 tty: true
             """
         }
