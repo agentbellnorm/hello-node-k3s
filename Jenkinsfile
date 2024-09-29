@@ -19,6 +19,9 @@ pipeline {
               - name: nodejs
                 image: node:18-bullseye-slim    # Use the appropriate Node.js version here
                 tty: true
+              - name: yq
+                image: mikefarah/yq:4-githubaction
+                tty: true
               - name: podman
                 image: quay.io/containers/podman:v5.2
                 tty: true
@@ -43,6 +46,16 @@ pipeline {
                 container('podman') {
                     sh 'podman -v'
                     sh 'podman build --tag $IMAGE_NAME -f ./Dockerfile'
+                    sh 'podman push $IMAGE_NAME $REGISTRY_URL/$IMAGE_NAME:$GIT_SHORT_HASH --creds=$REGISTRY_CREDS --tls-verify=false'
+                }
+            }
+        }
+        stage('update k8s deployment') {
+            steps {
+                container('yq') {
+                    sh 'cat $DEPLOY_MANIFEST'
+                    sh """yq -i '.spec.template.spec.containers[0].image |= sub(":[^:]+$", ":$GIT_SHORT_HASH")' $DEPLOYMENT_MANIFEST"""
+                    sh 'cat $DEPLOY_MANIFEST'
                 }
             }
         }
