@@ -20,7 +20,7 @@ pipeline {
                 image: node:18-bullseye-slim    # Use the appropriate Node.js version here
                 tty: true
               - name: yq
-                image: mikefarah/4.44.3-githubaction
+                image: mikefarah/yq:4.44.3-githubaction
                 tty: true
               - name: podman
                 image: quay.io/containers/podman:v5.2.3
