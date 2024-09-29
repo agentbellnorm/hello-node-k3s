@@ -21,7 +21,7 @@ pipeline {
                 tty: true
               - name: yq
                 image: mikefarah/yq:4.44.1
-                command: /bin/sh
+                command: sh
                 tty: true
               - name: podman
                 image: quay.io/containers/podman:v5.2.3
