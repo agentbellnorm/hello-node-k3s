@@ -20,10 +20,10 @@ pipeline {
                 image: node:18-bullseye-slim    # Use the appropriate Node.js version here
                 tty: true
               - name: yq
-                image: mikefarah/yq:4-githubaction
+                image: mikefarah/4.44.3-githubaction
                 tty: true
               - name: podman
-                image: quay.io/containers/podman:v5.2
+                image: quay.io/containers/podman:v5.2.3
                 tty: true
                 securityContext:
                   privileged: true  # Required for using the overlay driver
