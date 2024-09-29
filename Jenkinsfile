@@ -54,7 +54,7 @@ pipeline {
             steps {
                 container('yq') {
                     sh 'cat $DEPLOY_MANIFEST'
-                    sh """yq -i '.spec.template.spec.containers[0].image |= sub(":[^:]+$", ":$GIT_SHORT_HASH")' $DEPLOYMENT_MANIFEST"""
+                    sh 'yq -i \'.spec.template.spec.containers[0].image |= sub(":[^:]+$", ":$GIT_SHORT_HASH")\' $DEPLOYMENT_MANIFEST'
                     sh 'cat $DEPLOY_MANIFEST'
                 }
             }
