@@ -56,11 +56,7 @@ pipeline {
             steps {
                 container('yq') {
                     sh 'cat $DEPLOYMENT_MANIFEST'
-                    sh """
-    GIT_HASH=${GIT_SHORT_HASH}
-    MANIFEST=${DEPLOYMENT_MANIFEST}
-    yq -i '.spec.template.spec.containers[0].image |= sub(":[^:]+$", ":${GIT_HASH}")' \$MANIFEST
-"""
+                    sh 'yq -i \'.spec.template.spec.containers[0].image |= sub(":[^:]+$", ":strenv(GIT_SHORT_HASH)")\' $DEPLOYMENT_MANIFEST'
                     sh 'cat $DEPLOYMENT_MANIFEST'
                 }
             }
