@@ -4,7 +4,7 @@ pipeline {
         REGISTRY_CREDS = credentials('docker-registry-private')
         IMAGE_NAME='test/hello-node-k3s'
         GIT_SHORT_HASH = "${GIT_COMMIT[0..7]}"
-        DEPLOY_MANIFEST=".kubernetes/02-deployment.yml"
+        DEPLOYMENT_MANIFEST=".kubernetes/02-deployment.yml"
     }
     agent {
         kubernetes {
@@ -55,9 +55,9 @@ pipeline {
         stage('update k8s deployment') {
             steps {
                 container('yq') {
-                    sh 'cat $DEPLOY_MANIFEST'
+                    sh 'cat $DEPLOYMENT_MANIFEST'
                     sh 'yq -i \'.spec.template.spec.containers[0].image |= sub(":[^:]+$", ":$GIT_SHORT_HASH")\' $DEPLOYMENT_MANIFEST'
-                    sh 'cat $DEPLOY_MANIFEST'
+                    sh 'cat $DEPLOYMENT_MANIFEST'
                 }
             }
         }
