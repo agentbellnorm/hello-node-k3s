@@ -62,6 +62,7 @@ pipeline {
                 sshagent(['github-ssh-key']) {
                     sh 'git config --global user.name "Jenkins"'
                     sh 'git config --global user.email "jenkins@raspberrypile.com"'
+                    sh 'git checkout main'
                     sh 'git add $DEPLOYMENT_MANIFEST'
                     sh 'git commit -m "Update container image tag in k8s deployment"'
                     sh 'git push origin main'
