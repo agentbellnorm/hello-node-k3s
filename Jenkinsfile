@@ -58,7 +58,7 @@ pipeline {
                     sh 'cat $DEPLOYMENT_MANIFEST'
                     sh 'yq -i ".spec.template.spec.containers[0].image |= sub(\\\":[^:]+$\\\", \\\":$GIT_SHORT_HASH\\\")" $DEPLOYMENT_MANIFEST'
                     sh 'cat $DEPLOYMENT_MANIFEST'
-                },
+                }
                 sshagent(['github-ssh-key']) {
                     sh 'git config --global user.name "Jenkins"'
                     sh 'git config --global user.email "jenkins@raspberrypile.com"'
