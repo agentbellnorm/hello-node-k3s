@@ -6,7 +6,6 @@ metadata:
   labels:
     app: hello-node-on-k3s
     name: hello-node-on-k3s
-
 spec:
   replicas: 2
   selector:
@@ -21,6 +20,6 @@ spec:
     spec:
       containers:
         - name: hello-node-on-k3s
-          image: docker.registry.private/test/hello-node-k3s:latest
+          image: 'docker.registry.private/test/hello-node-k3s:latest'
           ports:
             - containerPort: 3000
