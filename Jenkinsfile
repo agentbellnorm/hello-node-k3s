@@ -64,6 +64,7 @@ pipeline {
                     sh 'git config --global user.email "jenkins@raspberrypile.com"'
                     sh 'git add $DEPLOYMENT_MANIFEST'
                     sh 'git commit -m "Update container image tag in k8s deployment"'
+                    sh 'git push origin main'
                 }
             }
         }
