@@ -20,6 +20,6 @@ spec:
     spec:
       containers:
         - name: hello-node-on-k3s
-          image: 'docker.registry.private/test/hello-node-k3s:5018a869'
+          image: 'docker.registry.private/test/hello-node-k3s:90e13e10'
           ports:
             - containerPort: 3000
